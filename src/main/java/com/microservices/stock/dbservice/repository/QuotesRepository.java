@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.microservices.stock.dbservice.model.Quotes;
+import com.microservices.stock.dbservice.model.Quote;
 
-public interface QuotesRepository extends JpaRepository<Quotes, Integer> {
+public interface QuotesRepository extends JpaRepository<Quote, Integer> {
 
-	List<Quotes> findByUserName(String username);
+	List<Quote> findByUserName(String username);
 
 }

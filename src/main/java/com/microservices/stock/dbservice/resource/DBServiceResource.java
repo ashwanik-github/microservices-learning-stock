@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.microservices.stock.dbservice.model.Quote;
 import com.microservices.stock.dbservice.model.Quotes;
 import com.microservices.stock.dbservice.repository.QuotesRepository;
 
@@ -25,14 +26,23 @@ public class DBServiceResource {
 
 	@GetMapping("/{username}")
 	public List<String> getQuotes(@PathVariable("username") final String username) {
-		return quotesRepository.findByUserName(username).stream().map(Quotes::getQuote).collect(Collectors.toList());
+		return getQuotesByUsername(username);
 
+	}
+
+	/**
+	 * @param username
+	 * @return
+	 */
+	private List<String> getQuotesByUsername(final String username) {
+		return quotesRepository.findByUserName(username).stream().map(Quote::getQuote).collect(Collectors.toList());
 	}
 
 	@PostMapping("/add")
 	public List<String> add(@RequestBody final Quotes quotes) {
-
-		return null;
+		quotes.getQuotes().stream().map(quote -> new Quote(quotes.getUsername(), quote))
+				.forEach(quote -> quotesRepository.save(quote));
+		return getQuotesByUsername(quotes.getUsername());
 
 	}
 

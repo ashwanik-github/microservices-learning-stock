@@ -1,64 +1,42 @@
 package com.microservices.stock.dbservice.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
 
-@Entity
-@Table(name = "quotes")
 public class Quotes {
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "id")
-	private Integer id;
 
-	@Column(name = "username")
-	private String userName;
+	private String username;
 
-	@Column(name = "quote")
-	private String quote;
+	private List<String> quotes;
 
 	public Quotes() {
+
+	}
+
+	public Quotes(String username, List<String> quotes) {
 		super();
+		this.username = username;
+		this.quotes = quotes;
 	}
 
-	public Quotes(Integer id, String userName, String quote) {
-		super();
-		this.id = id;
-		this.userName = userName;
-		this.quote = quote;
+	public String getUsername() {
+		return username;
 	}
 
-	public Integer getId() {
-		return id;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public List<String> getQuotes() {
+		return quotes;
 	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-
-	public String getQuote() {
-		return quote;
-	}
-
-	public void setQuote(String quote) {
-		this.quote = quote;
+	public void setQuotes(List<String> quotes) {
+		this.quotes = quotes;
 	}
 
 	@Override
 	public String toString() {
-		return "Quotes [id=" + id + ", userName=" + userName + ", quote=" + quote + "]";
+		return "Quotes [username=" + username + ", quotes=" + quotes + "]";
 	}
 
 }
